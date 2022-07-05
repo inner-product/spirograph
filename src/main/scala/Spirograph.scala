@@ -77,27 +77,7 @@ object Spirograph extends App {
       )
       .strokeWidth(3.0)
 
-  // hypocycloid: circle rotating within a circle, without slipping
-  def hypocycloid(innerCircle: Double, outerCircle: Double): Angle => Vec =
-    add(
-      circle(outerCircle - innerCircle),
-      speed((innerCircle - outerCircle) / innerCircle)
-        .andThen(circle(innerCircle))
-    )
-
-  def hypotrochoid(
-      offset: Double,
-      innerCircle: Double,
-      outerCircle: Double
-  ): Angle => Vec =
-    add(
-      circle(outerCircle - innerCircle),
-      speed((innerCircle - outerCircle) / innerCircle)
-        .andThen(circle(offset))
-    )
-
   import doodle.effect.Writer._
-  makeImage(hypocycloid(50, 190), stop = 2160.degrees).draw()
-  makeImage(hypotrochoid(75, 50, 190), stop = 2160.degrees).draw()
+  picture.draw()
   picture.write[Png]("curve.png")
 }
